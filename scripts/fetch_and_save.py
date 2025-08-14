@@ -12,7 +12,7 @@ def main():
     print(f"--> Running script to fetch papers for : '{search_query}'")
 
     data = fetch_papers_by_query(search_query, limit=20)
-    papers, authors = parse_paper_data(data.get('data', []))
+    papers, authors, authorship_edges, citation_edges = parse_paper_data(data.get('data', []))
 
 
     if data and data.get('data'):
@@ -23,9 +23,16 @@ def main():
         # Save the processed authors
         with open('data_store/processed_authors.json', 'w') as f:
             json.dump(authors, f, indent=4)
+        # Save the edges 
+        with open('data_store/authorship_edges.json', 'w') as f:
+            json.dump(authorship_edges, f, indent=4)
+            
+        with open('data_store/citation_edges.json', 'w') as f:
+            json.dump(citation_edges, f, indent=4)
+        
 
-        print(f"--> Success! Found {len(papers)} papers and {len(authors)} unique authors.")
-        print("--> Processed data saved to 'data_store/processed_papers.json' and 'data_store/processed_authors.json'")
+        print(f"--> Found {len(authorship_edges)} authorship links and {len(citation_edges)} citation links.")
+        print("--> All processed data has been saved to the 'data_store' directory.")
     else:
         print("failed to fetch or no papers found")
 
