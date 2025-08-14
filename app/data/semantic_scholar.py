@@ -1,4 +1,4 @@
-import requests
+import requests #  third-party Python library for making HTTP requests (like GET, POST, etc.) easily.
 
 def fetch_papers_by_query(query: str, limit: int = 10, fields: str = 'title,authors,citations.title'):
     """
@@ -6,7 +6,11 @@ def fetch_papers_by_query(query: str, limit: int = 10, fields: str = 'title,auth
     """
 
     search_url = "https://api.semanticscholar.org/graph/v1/paper/search"
-    params = {'query' : query, 'limit' : limit, 'fields': fields}
+    params = {
+        'query' : query, 
+        'limit' : limit, 
+        'fields': fields
+    }
 
     try:
         response = requests.get(search_url, params=params)
