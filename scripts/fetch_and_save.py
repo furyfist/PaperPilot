@@ -4,8 +4,8 @@ import os
 
 sys.path.append(os.path.join(os.path.dirname(__file__),'..'))
 
-from app.data.semantic_scholar import fetch_papers_by_query
-from app.core.graph_builder import parse_paper_data
+from backend.data.semantic_scholar import fetch_papers_by_query
+from backend.core.graph_builder import parse_paper_data
 
 def main():
     search_query = "carbon capture technologies"
